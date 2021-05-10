@@ -2,9 +2,11 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.0.2.
 
-## Setup TailwindCSS
+## Useful blog articles
 
-https://jacobneterer.medium.com/angular-and-tailwindcss-2388fb6e0bab
+* [Setup TailwindCSS](https://jacobneterer.medium.com/angular-and-tailwindcss-2388fb6e0bab)
+* [Install NVM](https://jamesauble.medium.com/install-nvm-on-mac-with-brew-adb921fb92cc)
+* [How to Use Tailwind With BEM](https://www.wearecogworks.com/blog/how-to-use-tailwind-with-bem/)
 
 ## Development server
 
