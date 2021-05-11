@@ -25,7 +25,7 @@ export class FormFieldComponent implements OnInit {
     return this.control && this.control.invalid && this.control.touched;
   }
 
-  get errorKey() {
+  get errorKey(): string | null {
     return this.control && this.control.errors && Object.keys(this.control.errors)[0];
   }
 
