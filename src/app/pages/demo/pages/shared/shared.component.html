@@ -10,7 +10,8 @@
     label="Input"
     [required]="true"
     [control]="form.controls.input"
-    [isInline]="isInline">
+    [isInline]="isInline"
+    [patternError]="regexErrors.email">
     <app-input formControlName="input"></app-input>
   </app-form-field>
 </form>
