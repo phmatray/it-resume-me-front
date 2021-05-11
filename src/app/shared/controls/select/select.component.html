@@ -6,8 +6,8 @@
     [value]="value"
     [disabled]="isDisabled"
     (selectionChange)="onChanged($event)"
-    (blur)="onBlur()">
-
+    (blur)="onBlur()"
+  >
     <mat-option *ngFor="let item of items" [value]="item.value">
       {{item.label}}
     </mat-option>

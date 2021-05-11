@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { InputModule } from './input/input.module';
-import { FormFieldModule } from './form-field/form-field.module';
-import { PasswordModule } from './password/password.module';
-import { SelectModule } from './select/select.module';
-import { CheckboxesModule } from './checkboxes/checkboxes.module';
-import { RadiosModule } from './radios/radios.module';
+import { InputModule } from '@app/shared/controls/input/input.module';
+import { FormFieldModule } from '@app/shared/controls/form-field/form-field.module';
+import { PasswordModule } from '@app/shared/controls/password/password.module';
+import { SelectModule } from '@app/shared/controls/select/select.module';
+import { CheckboxesModule } from '@app/shared/controls/checkboxes/checkboxes.module';
+import { RadiosModule } from '@app/shared/controls/radios/radios.module';
+import { DateModule } from '@app/shared/controls/date/date.module';
 
 @NgModule({
   declarations: [],
@@ -17,7 +18,8 @@ import { RadiosModule } from './radios/radios.module';
     PasswordModule,
     SelectModule,
     CheckboxesModule,
-    RadiosModule
+    RadiosModule,
+    DateModule
   ],
   exports: [
     InputModule,
@@ -25,7 +27,8 @@ import { RadiosModule } from './radios/radios.module';
     PasswordModule,
     SelectModule,
     CheckboxesModule,
-    RadiosModule
+    RadiosModule,
+    DateModule
   ]
 })
 export class ControlsModule { }

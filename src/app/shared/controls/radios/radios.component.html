@@ -8,7 +8,8 @@
         [value]="item.value"
         [attr.disabled]="isDisabled ? true : null"
         [checked]="isChecked(item.value)"
-        (change)="onChanged(item.value)">
+        (change)="onChanged(item.value)"
+      >
       <span class="radio__checkmark"></span>
     </label>
   </div>
