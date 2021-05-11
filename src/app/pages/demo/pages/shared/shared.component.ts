@@ -9,12 +9,20 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class SharedComponent implements OnInit {
 
   form: FormGroup;
+  isInline: boolean;
 
   constructor(private fb: FormBuilder) { }
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      input: [null]
+      input: [null, {
+        updateOn: 'blur',
+        validators: [
+          Validators.required,
+          Validators.minLength(3)
+          // Validators.pattern()
+        ]
+      }]
     });
   }
 
@@ -26,4 +34,7 @@ export class SharedComponent implements OnInit {
     this.form.patchValue({ input: 'test' });
   }
 
+  onToggleInline(): void {
+    this.isInline = !this.isInline;
+  }
 }
