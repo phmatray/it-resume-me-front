@@ -23,6 +23,7 @@ export class DateComponent implements OnInit, ControlValueAccessor {
   @Input() min: Date;
   @Input() max: Date;
   @Output() changed = new EventEmitter<Value>();
+  @Output() closed = new EventEmitter<void>();
 
   value: Value;
   isDisabled: boolean;
@@ -65,5 +66,6 @@ export class DateComponent implements OnInit, ControlValueAccessor {
 
   onClosed(): void {
     this.propagateTouched();
+    this.closed.emit();
   }
 }
