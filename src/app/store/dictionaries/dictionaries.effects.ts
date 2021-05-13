@@ -1,17 +1,15 @@
-import {Injectable} from '@angular/core';
-import {Actions, ofType, createEffect} from '@ngrx/effects';
+import { Injectable } from '@angular/core';
+import { Actions, ofType, createEffect } from '@ngrx/effects';
 
-import {AngularFirestore, DocumentChangeAction} from '@angular/fire/firestore';
+import { AngularFirestore, DocumentChangeAction } from '@angular/fire/firestore';
 
-import {Observable, of, zip} from 'rxjs';
-import {map, switchMap, catchError, take} from 'rxjs/operators';
+import { of, zip } from 'rxjs';
+import { map, switchMap, catchError, take } from 'rxjs/operators';
 
-import {Dictionaries, Dictionary, Item, ControlItem} from '@app/store/dictionaries/dictionaries.models';
+import { Dictionaries, Dictionary, Item, ControlItem } from './dictionaries.models';
 
 import * as fromActions from './dictionaries.actions';
 import * as jsonCountries from '@src/assets/countries.json';
-
-type Action = fromActions.All;
 
 const documentToItem = (x: DocumentChangeAction<any>): Item => {
   const data = x.payload.doc.data();
@@ -34,10 +32,9 @@ const addDictionary = (items: Item[]): Dictionary => ({
 
 @Injectable()
 export class DictionariesEffects {
-  // TODO: rename read to read$
-  read: Observable<Action> = createEffect(() => {
-    return this.actions.pipe(
-      ofType(fromActions.Types.READ),
+  read$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(fromActions.read),
       switchMap(() => {
         return zip(
           this.afs.collection('roles').snapshotChanges().pipe(
@@ -56,7 +53,7 @@ export class DictionariesEffects {
             take(1),
             map(items => items.map(x => documentToItem(x)))
           ),
-          of((jsonCountries as any).default.map(country => ({
+          of((jsonCountries as any).default.map((country: any) => ({
             id: country.code.toUpperCase(),
             name: country.name,
             icon: {
@@ -76,17 +73,16 @@ export class DictionariesEffects {
               countries: addDictionary(countries)
             };
 
-            return new fromActions.ReadSuccess(dictionaries);
+            return fromActions.readSuccess({ dictionaries });
           }),
-          catchError(err => of(new fromActions.ReadError(err.message)))
+          catchError(err => of(fromActions.readError({ error: err.message })))
         );
       })
     );
   });
 
   constructor(
-    private actions: Actions,
+    private actions$: Actions,
     private afs: AngularFirestore
-  ) {
-  }
+  ) {}
 }

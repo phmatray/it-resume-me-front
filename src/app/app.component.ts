@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 
 import { Store } from '@ngrx/store';
 import * as fromRoot from './store';
@@ -18,6 +17,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(new fromDictionaries.Read());
+    this.store.dispatch(fromDictionaries.read());
   }
 }
