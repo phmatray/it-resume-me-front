@@ -47,6 +47,11 @@ export class SharedComponent implements OnInit {
           Validators.pattern(regex.password)
         ]
       }],
+      autocomplete: [null, {
+        updateOn: 'change', validators: [
+          Validators.required
+        ]
+      }],
       select: [null, {
         updateOn: 'change', validators: [
           Validators.required
