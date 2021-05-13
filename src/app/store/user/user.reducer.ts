@@ -6,14 +6,14 @@ import * as fromActions from './user.actions';
 export interface UserState {
   entity: User | null;
   uid: string | null;
-  loading: boolean | null;
+  loading: boolean;
   error: string | null;
 }
 
 const initialState: UserState = {
   entity: null,
   uid: null,
-  loading: null,
+  loading: false,
   error: null
 };
 

@@ -47,7 +47,10 @@ export class UserEffects {
       switchMap(credentials =>
         from(this.afAuth.createUserWithEmailAndPassword(credentials.email, credentials.password)).pipe(
           switchMap(() => from(this.afAuth.currentUser)),
-          tap(user => user?.sendEmailVerification(environment.firebase.actionCodeSettings)),
+          tap(user => {
+            user?.sendEmailVerification(environment.firebase.actionCodeSettings);
+            this.router.navigate(['/auth/email-confirm']);
+          }),
           // tslint:disable-next-line:no-non-null-assertion
           map((user) => fromActions.signUpEmailSuccess({ uid: user!.uid })),
           catchError(err => {

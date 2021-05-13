@@ -5,13 +5,13 @@ import * as fromActions from './dictionaries.actions';
 
 export interface DictionariesState {
   entities: Dictionaries | null;
-  loading: boolean | null;
+  loading: boolean;
   error: string | null;
 }
 
 const initialState: DictionariesState = {
   entities: null,
-  loading: null,
+  loading: false,
   error: null
 };
 
