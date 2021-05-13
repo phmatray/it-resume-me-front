@@ -18,6 +18,26 @@ import { NotificationService } from '@app/services';
 
 @Injectable()
 export class UserEffects {
+  init$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(fromActions.init),
+      switchMap(() => this.afAuth.authState.pipe(take(1))),
+      switchMap(authState => {
+        if (authState) {
+
+          return this.afs.doc<User>(`users/${authState.uid}`).valueChanges().pipe(
+            take(1),
+            map(user => fromActions.initAuthorized({ uid: authState.uid, user: user || null })),
+            catchError(err => of(fromActions.initError({ error: err.message })))
+          );
+
+        } else {
+          return of(fromActions.initUnauthorized());
+        }
+      })
+    );
+  });
+
   signInEmail$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(fromActions.signInEmail),

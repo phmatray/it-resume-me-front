@@ -1,6 +1,26 @@
 import { createAction, props } from '@ngrx/store';
 import { User, EmailPasswordCredentials } from '@app/store/user/user.models';
 
+// Init
+
+export const init = createAction(
+  '[User] Init: Start'
+);
+
+export const initAuthorized = createAction(
+  '[User] Init: Authorized',
+  props<{ uid: string, user: User | null }>()
+);
+
+export const initUnauthorized = createAction(
+  '[User] Init: Unauthorized'
+);
+
+export const initError = createAction(
+  '[User] Init: Error',
+  props<{ error: string }>()
+);
+
 // Sign In
 
 export const signInEmail = createAction(

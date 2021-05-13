@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromRoot from './store';
 import * as fromDictionaries from './store/dictionaries';
+import * as fromUser from './store/user';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +18,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(fromUser.init());
     this.store.dispatch(fromDictionaries.read());
   }
 }
