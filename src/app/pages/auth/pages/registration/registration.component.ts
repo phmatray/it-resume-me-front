@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Observable } from 'rxjs';
 
 import { regex, regexErrors, markFormGroupTouched } from '@app/shared/utils';

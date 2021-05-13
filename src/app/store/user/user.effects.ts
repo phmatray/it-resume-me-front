@@ -47,6 +47,9 @@ export class UserEffects {
           switchMap(signInState =>
             this.afs.doc<User>(`users/${signInState.user?.uid}`).valueChanges().pipe(
               take(1),
+              tap(() => {
+                this.router.navigate(['/']);
+              }),
               // tslint:disable-next-line:no-non-null-assertion
               map(user => fromActions.signInEmailSuccess({ uid: signInState.user!.uid, user: user || null }))
             )
