@@ -3,10 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [{
   path: '',
-  children: [{
-    path: 'demo',
-    loadChildren: () => import('./pages/demo/demo.module').then(m => m.DemoModule)
-  }]
+  children: [
+    {
+      path: 'auth',
+      loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule)
+    },
+    {
+      path: 'demo',
+      loadChildren: () => import('./pages/demo/demo.module').then(m => m.DemoModule)
+    }
+  ]
 }];
 
 @NgModule({
