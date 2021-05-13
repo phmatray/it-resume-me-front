@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { regex, regexErrors } from '@app/shared/utils';
+import { regex, regexErrors, markFormGroupTouched } from '@app/shared/utils';
 
 import { ControlItem } from '@app/models/frontend';
 
@@ -37,7 +37,7 @@ export class SharedComponent implements OnInit {
         validators: [
           Validators.required,
           Validators.minLength(3),
-          Validators.pattern(regex.email)
+          Validators.pattern(regex.numbers)
         ]
       }],
       password: [null, {
@@ -82,13 +82,37 @@ export class SharedComponent implements OnInit {
 
   onSubmit(): void {
     console.log('Submit!');
+
+    if (!this.form.valid){
+      markFormGroupTouched(this.form);
+    }
   }
 
   onPatchValue(): void {
-    this.form.patchValue({ input: 'test' });
+    this.form.patchValue({
+      input: 123,
+      password: 'Qwerty123',
+      autocomplete: 1,
+      select: 2,
+      checkboxes: [3],
+      radios: 4,
+      date: new Date().getTime(),
+      dateRange: {
+        from: new Date(2021, 5, 10).getTime(),
+        to: new Date(2021, 5, 19).getTime()
+      }
+    });
   }
 
   onToggleInline(): void {
     this.isInline = !this.isInline;
+  }
+
+  onToggleDisable(): void {
+    if (this.form.enabled) {
+      this.form.disable();
+    } else {
+      this.form.enable();
+    }
   }
 }
