@@ -11,7 +11,7 @@
 
     <div>
 
-      {{ snapshot.bytesTransferred }} of {{ snapshot.totalBytes }}
+      {{ snapshot.bytesTransferred | fileSize }} of {{ snapshot.totalBytes | fileSize }}
 
     </div>
 
