@@ -18,20 +18,23 @@ export { ControlItem, Value } from '@app/models/frontend';
 })
 export class RadiosComponent implements OnInit, ControlValueAccessor {
 
-  @Input() items: ControlItem[];
+  @Input() items: ControlItem[] = [];
   @Output() changed = new EventEmitter<Value>();
 
-  value: Value;
+  value: Value | null;
   isDisabled: boolean;
 
-  constructor() { }
+  constructor() {
+    this.value = null;
+    this.isDisabled = false;
+  }
 
   ngOnInit(): void {
   }
 
   private propagateChange: any = () => { };
 
-  writeValue(value: Value[]): void {
+  writeValue(value: Value): void {
     this.value = value;
   }
 

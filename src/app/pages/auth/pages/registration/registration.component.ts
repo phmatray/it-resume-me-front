@@ -17,9 +17,9 @@ import * as fromUser from '@app/store/user';
 })
 export class RegistrationComponent implements OnInit {
 
-  form: FormGroup;
+  form!: FormGroup;
   regexErrors = regexErrors;
-  loading$: Observable<boolean>;
+  loading$!: Observable<boolean>;
 
   constructor(
     private fb: FormBuilder,

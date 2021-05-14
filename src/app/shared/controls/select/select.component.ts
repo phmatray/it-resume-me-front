@@ -20,14 +20,17 @@ export { ControlItem, Value } from '@app/models/frontend';
 })
 export class SelectComponent implements OnInit, ControlValueAccessor {
 
-  @Input() items: ControlItem[];
-  @Input() placeholder: string;
+  @Input() items: ControlItem[] = [];
+  @Input() placeholder: string | null = null;
   @Output() changed = new EventEmitter<Value>();
 
-  value: Value;
+  value: Value | null;
   isDisabled: boolean;
 
-  constructor() { }
+  constructor() {
+    this.value = null;
+    this.isDisabled = false;
+  }
 
   ngOnInit(): void {
   }

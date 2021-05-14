@@ -13,7 +13,7 @@ import { NotificationService } from '@app/services';
 })
 export class SharedComponent implements OnInit {
 
-  form: FormGroup;
+  form!: FormGroup;
   isInline: boolean;
   regexErrors = regexErrors;
 

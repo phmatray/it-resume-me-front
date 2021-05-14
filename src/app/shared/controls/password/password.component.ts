@@ -17,7 +17,7 @@ type PasswordType = 'password' | 'text';
 })
 export class PasswordComponent implements OnInit, ControlValueAccessor {
 
-  @Input() placeholder: string;
+  @Input() placeholder: string | null = null;
   @Output() changed = new EventEmitter<string>();
 
   value: string;
@@ -25,6 +25,8 @@ export class PasswordComponent implements OnInit, ControlValueAccessor {
   passwordType: PasswordType;
 
   constructor() {
+    this.value = '';
+    this.isDisabled = false;
     this.passwordType = 'password';
   }
 
@@ -47,6 +49,10 @@ export class PasswordComponent implements OnInit, ControlValueAccessor {
   }
 
   setDisabledState(isDisabled: boolean): void {
+    if (isDisabled) {
+      this.passwordType = 'password';
+    }
+
     this.isDisabled = isDisabled;
   }
 

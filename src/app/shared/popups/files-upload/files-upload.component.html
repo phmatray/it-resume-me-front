@@ -23,7 +23,7 @@
               class="file__input"
               [multiple]="data.multiple"
               type="file"
-              (change)="onDrop($event.target.files)"
+              (change)="onDrop($any($event.target).files)"
             >
             <span class="file__label">choose</span>
           </label>

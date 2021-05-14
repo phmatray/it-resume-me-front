@@ -14,7 +14,7 @@ import * as fromUser from './store/user';
 export class AppComponent implements OnInit {
   title = 'tailwindcss-angular-app';
 
-  isAuthorized$: Observable<boolean>;
+  isAuthorized$!: Observable<boolean>;
 
   constructor(
     private store: Store<fromRoot.State>) {

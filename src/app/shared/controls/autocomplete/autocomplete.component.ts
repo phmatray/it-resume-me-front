@@ -21,13 +21,13 @@ export { ControlItem, Value } from '@app/models/frontend';
 })
 export class AutocompleteComponent implements OnInit, OnDestroy, ControlValueAccessor {
 
-  @Input() items: ControlItem[];
-  @Input() placeholder: string;
+  @Input() items: ControlItem[] = [];
+  @Input() placeholder: string | null = null;
 
   @Output() changed = new EventEmitter<Value>();
 
   formControl = new FormControl();
-  options$: Observable<ControlItem[]>;
+  options$!: Observable<ControlItem[]>;
 
   private destroy = new Subject<any>();
 
@@ -85,8 +85,8 @@ export class AutocompleteComponent implements OnInit, OnDestroy, ControlValueAcc
     }
   }
 
-  displayFn(item?: ControlItem): string | undefined {
-    return item ? item.label : undefined;
+  displayFn(item?: ControlItem): string {
+    return item ? item.label : '';
   }
 
   onBlur(): void {

@@ -8,7 +8,7 @@ import { ChangeDetectionStrategy, Component, OnInit, Input, Output, EventEmitter
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() isAuthorized: boolean;
+  @Input() isAuthorized = false;
   @Output() signOut = new EventEmitter<void>();
 
   constructor() { }

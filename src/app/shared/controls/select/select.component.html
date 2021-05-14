@@ -5,6 +5,7 @@
   <mat-select
     [value]="value"
     [disabled]="isDisabled"
+    [placeholder]="placeholder || ''"
     (selectionChange)="onChanged($event)"
     (blur)="onBlur()"
   >

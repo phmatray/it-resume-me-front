@@ -18,8 +18,8 @@ export class InputComponent implements OnInit, ControlValueAccessor {
   @Input() placeholder = '';
   @Output() changed = new EventEmitter<string>();
 
-  value: string;
-  isDisabled: boolean;
+  value = '';
+  isDisabled = false;
 
   constructor() { }
 

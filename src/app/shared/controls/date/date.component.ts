@@ -19,17 +19,20 @@ type Value = number | null;
 })
 export class DateComponent implements OnInit, ControlValueAccessor {
 
-  @Input() placeholder: string;
-  @Input() min: Date;
-  @Input() max: Date;
+  @Input() placeholder: string | null = null;
+  @Input() min: Date | null = null;
+  @Input() max: Date | null = null;
 
   @Output() changed = new EventEmitter<Value>();
   @Output() closed = new EventEmitter<void>();
 
-  value: Value;
+  value: Value | null;
   isDisabled: boolean;
 
-  constructor() { }
+  constructor() {
+    this.value = null;
+    this.isDisabled = false;
+  }
 
   ngOnInit(): void {
   }

@@ -15,16 +15,22 @@ export class FilesUploadComponent implements OnInit {
 
   isHovering: boolean;
 
-  files: File[] = [];
-  imageFile: File | null = null;
+  files: File[];
+  imageFile: File | null;
   isError: boolean;
 
-  filesURLs: string[] = [];
+  filesURLs: string[];
 
   constructor(
     private dialogRef: MatDialogRef<FilesUploadComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
-  ) { }
+  ) {
+    this.isHovering = false;
+    this.files = [];
+    this.imageFile = null;
+    this.isError = false;
+    this.filesURLs = [];
+  }
 
   ngOnInit(): void {
   }
@@ -41,17 +47,22 @@ export class FilesUploadComponent implements OnInit {
       return;
     }
 
-    if (this.data.crop && files.length === 1 && files.item(0).type.split('/')[0] === 'image') {
-      this.imageFile = files.item(0);
-      return;
+    if (this.data.crop && files.length === 1) {
+      const file = files.item(0);
+      if (file && file.type.split('/')[0] === 'image') {
+        this.imageFile = files.item(0);
+        return;
+      }
     }
 
     for (let i = 0; i < files.length; i++) {
-      this.files.push(files.item(i));
+      const file = files.item(i);
+      if (file) {
+        this.files.push(file);
+      }
     }
 
     console.log(files);
-
   }
 
   onCrop(file: File): void {

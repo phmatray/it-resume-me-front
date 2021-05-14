@@ -9,23 +9,29 @@ import { dataURLtoFile } from '@app/shared/popups/files-upload/utils';
 })
 export class CropperComponent implements OnInit {
 
-  @Input() imageFile: File;
-
+  @Input() imageFile: File | null = null;
   @Output() changed = new EventEmitter<File>();
 
-  croppedImage: string;
+  croppedImage: string | null;
 
-  constructor() { }
+  constructor() {
+    this.croppedImage = null;
+  }
 
   ngOnInit(): void {
   }
 
   imageCropped(event: ImageCroppedEvent): void {
-    this.croppedImage = event.base64;
+    this.croppedImage = event.base64 || null;
   }
 
   onCrop(): void {
-    const file = dataURLtoFile(this.croppedImage, this.imageFile.name);
-    this.changed.emit(file);
+    if (this.croppedImage && this.imageFile) {
+      const file = dataURLtoFile(this.croppedImage, this.imageFile.name);
+
+      if (file) {
+        this.changed.emit(file);
+      }
+    }
   }
 }

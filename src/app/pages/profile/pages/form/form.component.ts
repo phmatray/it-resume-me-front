@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { StepperService } from './components/stepper/services';
+
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    public stepper: StepperService
+  ) { }
 
   ngOnInit(): void {
+
+    this.stepper.init([
+      { key: 'one', label: 'One' },
+      { key: 'two', label: 'Two' },
+      { key: 'three', label: 'Three' },
+    ]);
+
   }
 
 }

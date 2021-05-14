@@ -8,11 +8,11 @@ import { AbstractControl } from '@angular/forms';
 })
 export class FormFieldComponent implements OnInit {
 
-  @Input() label: string;
-  @Input() required: boolean;
-  @Input() isInline: boolean;
-  @Input() control: AbstractControl;
-  @Input() patternError: string;
+  @Input() label: string | null = null;
+  @Input() required = false;
+  @Input() isInline = false;
+  @Input() control: AbstractControl | null = null;
+  @Input() patternError: string | null = null;
 
   constructor() {
     this.isInline = true;
@@ -22,7 +22,7 @@ export class FormFieldComponent implements OnInit {
   }
 
   hasError(): boolean {
-    return this.control && this.control.invalid && this.control.touched;
+    return !!(this.control && this.control.invalid && this.control.touched);
   }
 
   get errorKey(): string | null {

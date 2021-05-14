@@ -18,13 +18,16 @@ export { ControlItem, Value } from '@app/models/frontend';
 })
 export class CheckboxesComponent implements OnInit, ControlValueAccessor {
 
-  @Input() items: ControlItem[];
+  @Input() items: ControlItem[] = [];
   @Output() changed = new EventEmitter<Value[]>();
 
   value: Value[];
   isDisabled: boolean;
 
-  constructor() { }
+  constructor() {
+    this.value = [];
+    this.isDisabled = false;
+  }
 
   ngOnInit(): void {
   }

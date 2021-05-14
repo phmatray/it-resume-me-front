@@ -7,8 +7,8 @@ export interface Value {
 }
 
 export interface Placeholder {
-  from: string;
-  to: string;
+  from: string | null;
+  to: string | null;
 }
 
 @Component({
@@ -25,10 +25,10 @@ export interface Placeholder {
 })
 export class DateRangeComponent implements OnInit, ControlValueAccessor {
 
-  @Input() placeholder: Placeholder;
+  @Input() placeholder: Placeholder = { from: null, to: null };
   @Output() changed = new EventEmitter<Value>();
 
-  form: FormGroup;
+  form!: FormGroup;
 
   constructor(private fb: FormBuilder) { }
 
