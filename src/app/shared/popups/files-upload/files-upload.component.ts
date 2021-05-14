@@ -49,4 +49,7 @@ export class FilesUploadComponent implements OnInit {
 
   }
 
+  onUploadComplete(url: string): void {
+    this.filesURLs.push(url);
+  }
 }
