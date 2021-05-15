@@ -45,4 +45,20 @@ export class StepperComponent implements OnInit {
       ? this.activeStep.index === this.steps.length - 1
       : false;
   }
+
+  onNext(): void {
+    this.stepper.onNext();
+  }
+
+  onComplete(): void {
+
+  }
+
+  onPrev(): void {
+    this.stepper.onPrev();
+  }
+
+  onCancel(): void {
+
+  }
 }

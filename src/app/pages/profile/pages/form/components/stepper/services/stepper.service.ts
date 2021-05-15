@@ -21,4 +21,18 @@ export class StepperService {
     this.steps = steps;
     this.activeStep = { ...steps[0], index: 0 };
   }
+
+  onNext(): void {
+    if (this.steps && this.activeStep) {
+      const index = this.activeStep.index + 1;
+      this.activeStep = { ...this.steps[index], index };
+    }
+  }
+
+  onPrev(): void {
+    if (this.steps && this.activeStep) {
+      const index = this.activeStep?.index - 1;
+      this.activeStep = { ...this.steps[index], index };
+    }
+  }
 }

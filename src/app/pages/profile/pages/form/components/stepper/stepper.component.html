@@ -23,6 +23,11 @@
     <ng-content></ng-content>
   </div>
 
-  <div class="stepper__footer"></div>
+  <div class="stepper__footer">
+    <button class="app-button" *ngIf="isFirst()" (click)="onCancel()">Cancel</button>
+    <button class="app-button" *ngIf="!isFirst()" (click)="onPrev()">&#8592;</button>
+    <button class="app-button" *ngIf="!isLast()" (click)="onNext()">&#8594;</button>
+    <button class="app-button" *ngIf="isLast()" (click)="onComplete()">Complete</button>
+  </div>
 
 </div>
