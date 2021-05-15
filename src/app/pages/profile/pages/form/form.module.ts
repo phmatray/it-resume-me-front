@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormFieldModule, InputModule, AutocompleteModule } from '@app/shared/controls';
 import { FilesUploadModule } from '@app/shared/popups';
 import { SpinnerModule } from '@app/shared/indicators';
+import { UserPhotoModule } from '@app/shared/layout';
 
 import { FormRoutingModule } from './form-routing.module';
 import { FormComponent } from './form.component';
@@ -25,6 +26,7 @@ import { ProfessionalComponent } from './components/professional/professional.co
     AutocompleteModule,
     FilesUploadModule,
     SpinnerModule,
+    UserPhotoModule,
     StepperModule
   ]
 })
