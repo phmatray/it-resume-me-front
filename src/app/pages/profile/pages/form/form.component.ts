@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+
+import { Subject, Observable, zip } from 'rxjs';
+import { takeUntil, switchMap } from 'rxjs/operators';
 
 import { StepperService } from './components/stepper/services';
 
@@ -7,7 +10,9 @@ import { StepperService } from './components/stepper/services';
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, OnDestroy {
+
+  private destroy = new Subject<void>();
 
   constructor(
     public stepper: StepperService
@@ -16,11 +21,23 @@ export class FormComponent implements OnInit {
   ngOnInit(): void {
 
     this.stepper.init([
-      { key: 'one', label: 'One' },
-      { key: 'two', label: 'Two' },
-      { key: 'three', label: 'Three' },
+      { key: 'personal', label: 'Personal' },
+      { key: 'professional', label: 'Professional' }
     ]);
 
+    this.stepper.complete$.pipe(takeUntil(this.destroy)).subscribe(() => {
+      console.log('completed');
+    });
+
+    this.stepper.cancel$.pipe(takeUntil(this.destroy)).subscribe(() => {
+      console.log('canceled');
+    });
+
+  }
+
+  ngOnDestroy(): void {
+    this.destroy.next();
+    this.destroy.complete();
   }
 
 }
