@@ -8,6 +8,7 @@ import * as fromRoot from '@app/store';
 import * as fromDictionaries from '@app/store/dictionaries';
 
 import { PersonalForm } from './components/personal/personal.component';
+import { ProfessionalForm } from './components/professional/professional.component';
 
 import { StepperService } from './components/stepper/services';
 
@@ -35,8 +36,8 @@ export class FormComponent implements OnInit, OnDestroy {
     this.dictionariesIsReady$ = this.store.pipe(select(fromDictionaries.getIsReady));
 
     this.stepper.init([
+      { key: 'professional', label: 'Professional' },
       { key: 'personal', label: 'Personal' },
-      { key: 'professional', label: 'Professional' }
     ]);
 
     this.stepper.complete$.pipe(takeUntil(this.destroy)).subscribe(() => {
@@ -56,5 +57,9 @@ export class FormComponent implements OnInit, OnDestroy {
 
   onChangedPersonal(data: PersonalForm): void {
     console.log('personal changed = ', data);
+  }
+
+  onChangedProfessional(data: ProfessionalForm): void {
+    console.log('professional changed = ', data);
   }
 }
