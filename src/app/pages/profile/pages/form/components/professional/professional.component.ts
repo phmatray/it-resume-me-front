@@ -15,10 +15,13 @@ import { Dictionaries } from '@app/store/dictionaries';
 
 import { StepperService } from '../stepper/services';
 
+import { EmployeeForm } from './roles/employee/employee.component';
+import { RecruiterForm } from './roles/recruiter/recruiter.component';
+
 export interface ProfessionalForm {
   about: string;
   roleId: string;
-  // role: EmployeeForm | RecruiterForm
+  role: EmployeeForm | RecruiterForm;
 }
 
 @Component({
@@ -53,11 +56,7 @@ export class ProfessionalComponent implements OnInit, OnDestroy {
           Validators.required
         ]
       }],
-      about: [null, {
-        updateOn: 'blur', validators: [
-          Validators.required
-        ]
-      }]
+      about: [null]
     });
 
     if (this.value) {

@@ -16,10 +16,12 @@ import { FormComponent } from './form.component';
 import { StepperModule } from './components';
 import { PersonalComponent } from './components/personal/personal.component';
 import { ProfessionalComponent } from './components/professional/professional.component';
+import { EmployeeComponent } from './components/professional/roles/employee/employee.component';
+import { RecruiterComponent } from './components/professional/roles/recruiter/recruiter.component';
 
 
 @NgModule({
-  declarations: [FormComponent, PersonalComponent, ProfessionalComponent],
+  declarations: [FormComponent, PersonalComponent, ProfessionalComponent, EmployeeComponent, RecruiterComponent],
   imports: [
     CommonModule,
     FormRoutingModule,
