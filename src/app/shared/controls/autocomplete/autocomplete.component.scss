@@ -18,6 +18,12 @@
     display: flex;
     align-items: center;
   }
+
+  span {
+    height: 14px;
+    width: 22px;
+    border: 1px solid $base-dark
+  }
 }
 
 :host-context(.form-field_error) {

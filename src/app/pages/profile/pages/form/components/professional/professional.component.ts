@@ -1,14 +1,23 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {
+  Component, OnInit, OnDestroy, Input, Output,
+  EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef
+} from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+
+import { regex, regexErrors } from '@app/shared/utils';
+import { markFormGroupTouched } from '@app/shared/utils/form';
+
+import { Dictionaries } from '@app/store/dictionaries';
 
 import { StepperService } from '../stepper/services';
 
 @Component({
   selector: 'app-professional',
   templateUrl: './professional.component.html',
-  styleUrls: ['./professional.component.scss']
+  styleUrls: ['./professional.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfessionalComponent implements OnInit, OnDestroy {
 

@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { FormFieldModule, InputModule, AutocompleteModule } from '@app/shared/controls';
+import { FilesUploadModule } from '@app/shared/popups';
+import { SpinnerModule } from '@app/shared/indicators';
 
 import { FormRoutingModule } from './form-routing.module';
 import { FormComponent } from './form.component';
@@ -14,6 +19,12 @@ import { ProfessionalComponent } from './components/professional/professional.co
   imports: [
     CommonModule,
     FormRoutingModule,
+    ReactiveFormsModule,
+    FormFieldModule,
+    InputModule,
+    AutocompleteModule,
+    FilesUploadModule,
+    SpinnerModule,
     StepperModule
   ]
 })
