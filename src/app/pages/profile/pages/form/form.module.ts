@@ -6,6 +6,7 @@ import {
   FormFieldModule, InputModule, AutocompleteModule,
   SelectModule, CheckboxesModule, RadiosModule, DateRangeModule
 } from '@app/shared/controls';
+import { ButtonModule } from '@app/shared/buttons';
 import { FilesUploadModule } from '@app/shared/popups';
 import { SpinnerModule } from '@app/shared/indicators';
 import { UserPhotoModule } from '@app/shared/layout';
@@ -18,10 +19,11 @@ import { PersonalComponent } from './components/personal/personal.component';
 import { ProfessionalComponent } from './components/professional/professional.component';
 import { EmployeeComponent } from './components/professional/roles/employee/employee.component';
 import { RecruiterComponent } from './components/professional/roles/recruiter/recruiter.component';
+import { ExperiencesComponent } from './components/professional/roles/employee/experiences/experiences.component';
 
 
 @NgModule({
-  declarations: [FormComponent, PersonalComponent, ProfessionalComponent, EmployeeComponent, RecruiterComponent],
+  declarations: [FormComponent, PersonalComponent, ProfessionalComponent, EmployeeComponent, RecruiterComponent, ExperiencesComponent],
   imports: [
     CommonModule,
     FormRoutingModule,
@@ -33,6 +35,7 @@ import { RecruiterComponent } from './components/professional/roles/recruiter/re
     CheckboxesModule,
     RadiosModule,
     DateRangeModule,
+    ButtonModule,
     FilesUploadModule,
     SpinnerModule,
     UserPhotoModule,

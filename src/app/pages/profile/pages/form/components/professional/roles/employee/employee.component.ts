@@ -2,12 +2,16 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Dictionaries } from '@app/store/dictionaries';
 
+import { ControlEntities, mapControls } from '@app/shared/utils/form';
+
+import { ExperienceForm } from './experiences/experiences.component';
+
 export interface EmployeeForm {
   specialization: string;
   skills: string[];
   qualification: string;
   expectedSalary: number;
-  // experiences
+  experiences: ExperienceForm[];
 }
 
 @Component({
@@ -17,13 +21,14 @@ export interface EmployeeForm {
 })
 export class EmployeeComponent implements OnInit, OnDestroy {
 
-  @Input() parent: FormGroup;
-  @Input() name: string;
+  @Input() parent: FormGroup | null = null;
+  @Input() name: string | null = null;
 
-  @Input() value: EmployeeForm;
-  @Input() dictionaries: Dictionaries;
+  @Input() value: EmployeeForm | null = null;
+  @Input() dictionaries: Dictionaries | null = null;
 
   form!: FormGroup;
+  controls!: ControlEntities;
 
   constructor(
     private fb: FormBuilder
@@ -31,27 +36,65 @@ export class EmployeeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      specialization: [null, {
-        updateOn: 'blur', validators: [
-          Validators.required
-        ]
-      }],
-      skills: [null, {
-        updateOn: 'blur', validators: [
-          Validators.required
-        ]
-      }],
-      qualification: [null, {
-        updateOn: 'blur', validators: [
-          Validators.required
-        ]
-      }],
       expectedSalary: [null, {
         updateOn: 'blur', validators: [
           Validators.required
         ]
       }],
+      specialization: [null, {
+        updateOn: 'blur', validators: [
+          Validators.required
+        ]
+      }],
+      qualification: [{ value: null, disabled: true }, {
+        updateOn: 'blur', validators: [
+          Validators.required
+        ]
+      }],
+      skills: [{ value: null, disabled: true }, {
+        updateOn: 'blur', validators: [
+          Validators.required
+        ]
+      }],
     });
+
+    this.controls = {
+      specialization: {
+        items: this.dictionaries.specializations.controlItems,
+        changed: () => {
+          this.controls.qualification.map();
+          this.controls.skills.map();
+        }
+      },
+      qualification: {
+        items: this.dictionaries.qualifications.controlItems,
+        map: () => {
+          if (this.form.value.specialization) {
+            this.form.controls.qualification.enable();
+          } else {
+            this.form.controls.qualification.reset();
+            this.form.controls.qualification.disable();
+          }
+        }
+      },
+      skills: {
+        items: this.dictionaries.skills.controlItems,
+        map: () => {
+          if (this.form.value.specialization) {
+            this.form.controls.skills.enable();
+
+            const items = [...this.dictionaries.skills.controlItems].map(
+              (item, index) => ({ ...item, label: `${item.label} (${index + 1})` })
+            );
+
+            this.controls.skills.items = items;
+          } else {
+            this.form.controls.skills.reset();
+            this.form.controls.skills.disable();
+          }
+        }
+      }
+    };
 
     if (this.value) {
       this.form.patchValue(this.value);
